@@ -26,49 +26,41 @@ function getRecipe(searchTerm) {
         });
 }
 function displayRecipe(responseJson) {
-    //console.log(responseJson);
     const feeds = responseJson.feed;
     $('#results-list').empty();
     $('#results').removeClass('hidden');
 
 
     console.log(feeds[0].display.displayName);
-    //console.log(feeds[0].console.preparationSteps[0]);
     console.log(feeds[0].content.videos.originalVideoUrl)
-    /*  if(!(results.totalResults == 0)) */
-    /* {  */
 
     for (let i = 0; i < feeds.length; i++) {
         console.log(feeds[i].content.preparationSteps);
             for (let j = 0; j < feeds[i].content.preparationSteps; j++){
                 console.log(feeds[i].content.preparationSteps(j));
             }
-        console.log(feeds[i].display.displayName);
-        console.log(feeds[i].content.videos.originalVideoUrl);
-        var video = `<li>${(
+
+        var video = `${(
             '<embed />', {
                 id: 'video',
                 src: feeds[i].content.videos.originalVideoUrl,
                 type: 'mp4',
                 controls: true
-            })
-        }</li>`
+            }) }`
         const entry = 
                 `<li>
-                    <h3> ${feeds[i].display.displayName}</h3>
-                    <p> ${feeds[i].content.preparationSteps(j)}</p>
+                    <h3> ${feeds[i].display.displayName}</h3> 
                 </li> `
-       
-       
-       
+        const preparation = 
+                    ` <li> 
+                        ${feeds[i].content.preparationSteps(j)}
+                    </li>   `
+        
          $('#results-list').append(entry);
-        $('#results-list').append(video);
-
+         $('#results-list').append(video);
+        $('#results-list').append(preparation); 
 
     }
-
-    /* }  */
-    /* else $('#results-list').html("Recipe not found");  */
 
 }
 
