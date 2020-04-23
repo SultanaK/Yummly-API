@@ -39,20 +39,32 @@ function displayRecipe(responseJson) {
     /* {  */
 
     for (let i = 0; i < feeds.length; i++) {
-        //console.log(feeds[i].console.preparationSteps);
+        console.log(feeds[i].content.preparationSteps);
+            for (let j = 0; j < feeds[i].content.preparationSteps; j++){
+                console.log(feeds[i].content.preparationSteps(j));
+            }
         console.log(feeds[i].display.displayName);
         console.log(feeds[i].content.videos.originalVideoUrl);
+        var video = `<li>${(
+            '<embed />', {
+                id: 'video',
+                src: feeds[i].content.videos.originalVideoUrl,
+                type: 'mp4',
+                controls: true
+            })
+        }</li>`
+        const entry = 
+                `<li>
+                    <h3> ${feeds[i].display.displayName}</h3>
+                    <p> ${feeds[i].content.preparationSteps(j)}</p>
+                </li> `
+       
+       
+       
+         $('#results-list').append(entry);
+        $('#results-list').append(video);
 
-        const entry = `<li>
-               <h3> ${feeds[i].display.displayName}</h3>
-               var video = $('<embed />', {
-                        id: 'video',
-                        src: feeds[i].content.videos.originalVideoUrl,
-                        type: 'mp4',
-                        controls: true
-                        }); 
-        </li> `
-        $('#results-list').append(entry);
+
     }
 
     /* }  */
