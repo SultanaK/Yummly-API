@@ -36,29 +36,32 @@ function displayRecipe(responseJson) {
 
     for (let i = 0; i < feeds.length; i++) {
         console.log(feeds[i].content.preparationSteps);
-            for (let j = 0; j < feeds[i].content.preparationSteps; j++){
-                console.log(feeds[i].content.preparationSteps(j));
+            var preparation ="";
+            for (let j = 0; j < feeds[i].content.preparationSteps.length; j++){
+               console.log ( feeds[i].content.preparationSteps[j]);
+                    preparation += `<p> ${feeds[i].content.preparationSteps(j)}<p>`
+                 console.log(preparation); 
             }
 
-        var video = `${(
-            '<embed />', {
+        /* var video = `${(
+            '<embed />',
+             {
                 id: 'video',
-                src: feeds[i].content.videos.originalVideoUrl,
+                src: feeds[i].content.videos.originalVideoUrl ,
                 type: 'mp4',
-                controls: true
-            }) }`
+                controls: true 
+            }) }` */
+         const preparationRecipe =
+               `<p> ${feeds[i].content.preparationSteps(j)}</p> `  
         const entry = 
                 `<li>
                     <h3> ${feeds[i].display.displayName}</h3> 
-                </li> `
-        const preparation = 
-                    ` <li> 
-                        ${feeds[i].content.preparationSteps(j)}
-                    </li>   `
+                </li>`
+       
         
          $('#results-list').append(entry);
-         $('#results-list').append(video);
-        $('#results-list').append(preparation); 
+        // $('#results-list').append(video);
+         $('#preparation').html(preparation); 
 
     }
 
